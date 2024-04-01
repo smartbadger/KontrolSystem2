@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -23,7 +24,7 @@ public static class BindingGenerator {
     public static CompiledKontrolModule BindModule(Type moduleType, IEnumerable<RealizedType>? additionalTypes = null,
         IEnumerable<IKontrolConstant>? additionConstants = null) {
         lock (BoundModules) {
-            if (BoundModules.ContainsKey(moduleType)) return BoundModules[moduleType];
+            if (BoundModules.TryGetValue(moduleType, out var bindModule)) return bindModule;
 
             var ksModule = moduleType.GetCustomAttribute<KSModule>();
 
@@ -94,28 +95,36 @@ public static class BindingGenerator {
 
         if (ksClass == null) throw new ArgumentException($"Type {type} must have a kSClass attribute");
 
+        var isEnumerable = typeof(IEnumerable).IsAssignableFrom(type);
+        var isArrayLike = typeof(IArrayLike).IsAssignableFrom(type);
         var boundType = new BoundType(modulePrefix, ksClass.Name ?? type.Name,
             NormalizeDescription(ksClass.Description), type,
-            BuiltinType.NoOperators, BuiltinType.NoOperators,
-            [],
-            []
+            allowedPrefixOperators: BuiltinType.NoOperators,
+            allowedSuffixOperators: BuiltinType.NoOperators,
+            allowedMethods: isEnumerable ? EnumerableMethods.MethodInvokers(type) : [],
+            allowedFields: isArrayLike ? [
+                (name: "length", access: new BoundPropertyLikeFieldAccessFactory("length", () => BuiltinType.Int, type, type.GetProperty("Length")))] : [],
+            indexAccessEmitterFactory: isArrayLike ? indexSpec => indexSpec.indexType switch {
+                IndexSpecType.Single => new BoundArrayLikeIndexAccess(type, indexSpec.start),
+                _ => null,
+            } : null,
+            forInSource: isEnumerable ? new BoundEnumerableForInSource(type) : null
         );
         RegisterTypeMapping(type, boundType);
         return boundType;
     }
 
     private static void LinkType(BoundType boundType) {
-        foreach (var method in boundType.runtimeType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                ) {
-            var ksMethod = method.GetCustomAttribute<KSMethod>();
+        var interfaces = boundType.runtimeType.GetCustomAttribute<KSClass>().ScanInterfaces ?? [];
+        foreach (var method in boundType.runtimeType.GetMethods(BindingFlags.Public | BindingFlags.Instance)) {
+            var ksMethod = method.GetCustomAttribute<KSMethod>() ?? interfaces.Select(i => i.GetMethod(method.Name)?.GetCustomAttribute<KSMethod>()).FirstOrDefault(attr => attr != null);
             if (ksMethod == null) continue;
             boundType.allowedMethods.Add(ksMethod.Name ?? ToSnakeCase(method.Name),
                 BindMethod(NormalizeDescription(ksMethod.Description), boundType.runtimeType, method));
         }
 
-        foreach (var property in boundType.runtimeType.GetProperties(BindingFlags.Public |
-                                                                     BindingFlags.Instance)) {
-            var ksField = property.GetCustomAttribute<KSField>();
+        foreach (var property in boundType.runtimeType.GetProperties(BindingFlags.Public | BindingFlags.Instance)) {
+            var ksField = property.GetCustomAttribute<KSField>() ?? interfaces.Select(i => i.GetProperty(property.Name)?.GetCustomAttribute<KSField>()).FirstOrDefault(attr => attr != null); ;
             if (ksField == null) continue;
 
             boundType.allowedFields.Add(ksField.Name ?? ToSnakeCase(property.Name),

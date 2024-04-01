@@ -25,24 +25,6 @@ public partial class KSPOrbitModule {
         [KSField(Description = "The celestial body the orbit is referenced on.")]
         IBody ReferenceBody { get; }
 
-        [KSField(Description = "Universal time of the start of the orbit, in case it is an orbit-patch")]
-        public double StartUt { get; }
-
-        [KSField(Description = "Universal time of the start of the orbit, in case it is an orbit-patch")]
-        public double EndUt { get; }
-
-        [KSField(Description = "Get transition type at the beginning of the orbit patch")]
-        public PatchTransitionType StartTransition { get; }
-
-        [KSField(Description = "Get transition type at the end of the orbit patch")]
-        public PatchTransitionType EndTransition { get; }
-
-        [KSField(Description = "Get the previous orbit patch of the trajectory (if available)")]
-        public Option<IOrbit> PreviousPatch { get; }
-
-        [KSField(Description = "Get the next orbit patch of the trajectory (if available)")]
-        public Option<IOrbit> NextPatch { get; }
-
         [KSField(Description =
             "Apoapsis of the orbit above sealevel of the `reference_body`. Is not defined for a hyperbolic orbit")]
         Option<double> Apoapsis { get; }
@@ -215,6 +197,12 @@ public partial class KSPOrbitModule {
                 computed as the angle this vector makes with the vector pointing to the periapsis.
                 The returned value is always between 0 and 2pi.")]
         double TrueAnomalyFromVector(Vector3d vec);
+
+        [KSMethod("true_anomaly_at_ut", Description = @"The true anomaly of the orbit at a given universal type `ut`.
+                The vector is projected into the orbital plane and then the true anomaly is
+                computed as the angle this vector makes with the vector pointing to the periapsis.
+                The returned value is always between 0 and 2pi.")]
+        double TrueAnomalyAtUT(double ut);
 
         [KSMethod(Description =
             @"Gives the true anomaly (in a's orbit) at which a crosses its ascending node with b's orbit.

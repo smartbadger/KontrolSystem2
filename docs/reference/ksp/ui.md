@@ -25,12 +25,13 @@ String representation of the number
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-Center | [ksp::ui::Align](/reference/ksp/ui.md#align) | R/O | Align the element to the center of the container.
-End | [ksp::ui::Align](/reference/ksp/ui.md#align) | R/O | Align the element to end of container (right/bottom).
-Start | [ksp::ui::Align](/reference/ksp/ui.md#align) | R/O | Align the element to start of container (left/top).
-Stretch | [ksp::ui::Align](/reference/ksp/ui.md#align) | R/O | Stretch the element to full size of container
+| Name    | Type                                         | Read-only | Description                                           |
+| ------- | -------------------------------------------- | --------- | ----------------------------------------------------- |
+| Center  | [ksp::ui::Align](/reference/ksp/ui.md#align) | R/O       | Align the element to the center of the container.     |
+| End     | [ksp::ui::Align](/reference/ksp/ui.md#align) | R/O       | Align the element to end of container (right/bottom). |
+| Start   | [ksp::ui::Align](/reference/ksp/ui.md#align) | R/O       | Align the element to start of container (left/top).   |
+| Stretch | [ksp::ui::Align](/reference/ksp/ui.md#align) | R/O       | Stretch the element to full size of container         |
+
 
 #### Methods
 
@@ -44,9 +45,10 @@ Parse from string
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-value | string |  | Enum value to lookup
+| Name  | Type   | Optional | Description          |
+| ----- | ------ | -------- | -------------------- |
+| value | string |          | Enum value to lookup |
+
 
 ### Button
 
@@ -54,11 +56,12 @@ value | string |  | Enum value to lookup
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-enabled | bool | R/W | Enable/disable the button 
-font_size | float | R/W | Font size of the button label 
-label | string | R/W | Button label 
+| Name      | Type   | Read-only | Description                    |
+| --------- | ------ | --------- | ------------------------------ |
+| enabled   | bool   | R/W       | Enable/disable the button      |
+| font_size | float  | R/W       | Font size of the button label  |
+| label     | string | R/W       | Button label                   |
+
 
 #### Methods
 
@@ -73,9 +76,10 @@ Function to be called if button is clicked
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-onClick | sync fn() -> Unit |  | 
+| Name    | Type              | Optional | Description |
+| ------- | ----------------- | -------- | ----------- |
+| onClick | sync fn() -> Unit |          |             |
+
 
 ##### remove
 
@@ -91,11 +95,12 @@ button.remove ( ) -> Unit
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-height | float | R/O | Current height of the canvas (determined by the surrounding container) 
-min_size | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | Minimum size of the canvas. 
-width | float | R/O | Current width of the canvas (determined by the surrounding container) 
+| Name     | Type                                           | Read-only | Description                                                             |
+| -------- | ---------------------------------------------- | --------- | ----------------------------------------------------------------------- |
+| height   | float                                          | R/O       | Current height of the canvas (determined by the surrounding container)  |
+| min_size | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W       | Minimum size of the canvas.                                             |
+| width    | float                                          | R/O       | Current width of the canvas (determined by the surrounding container)   |
+
 
 #### Methods
 
@@ -112,12 +117,13 @@ canvas.add_line ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-strokeColor | ksp::console::RgbaColor |  | 
-closed | bool | x | 
-thickness | float | x | 
+| Name        | Type                    | Optional | Description |
+| ----------- | ----------------------- | -------- | ----------- |
+| points      | ksp::math::Vec2[]       |          |             |
+| strokeColor | ksp::console::RgbaColor |          |             |
+| closed      | bool                    | x        |             |
+| thickness   | float                   | x        |             |
+
 
 ##### add_pixel_line
 
@@ -131,11 +137,12 @@ canvas.add_pixel_line ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-strokeColor | ksp::console::RgbaColor |  | 
-closed | bool | x | 
+| Name        | Type                    | Optional | Description |
+| ----------- | ----------------------- | -------- | ----------- |
+| points      | ksp::math::Vec2[]       |          |             |
+| strokeColor | ksp::console::RgbaColor |          |             |
+| closed      | bool                    | x        |             |
+
 
 ##### add_polygon
 
@@ -148,10 +155,11 @@ canvas.add_polygon ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-fillColor | ksp::console::RgbaColor |  | 
+| Name      | Type                    | Optional | Description |
+| --------- | ----------------------- | -------- | ----------- |
+| points    | ksp::math::Vec2[]       |          |             |
+| fillColor | ksp::console::RgbaColor |          |             |
+
 
 ##### add_rect
 
@@ -165,11 +173,12 @@ canvas.add_rect ( point1 : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-point1 | ksp::math::Vec2 |  | 
-point2 | ksp::math::Vec2 |  | 
-fillColor | ksp::console::RgbaColor |  | 
+| Name      | Type                    | Optional | Description |
+| --------- | ----------------------- | -------- | ----------- |
+| point1    | ksp::math::Vec2         |          |             |
+| point2    | ksp::math::Vec2         |          |             |
+| fillColor | ksp::console::RgbaColor |          |             |
+
 
 ##### add_rotate
 
@@ -181,9 +190,10 @@ canvas.add_rotate ( degrees : float ) -> ksp::ui::Rotate2D
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-degrees | float |  | 
+| Name    | Type  | Optional | Description |
+| ------- | ----- | -------- | ----------- |
+| degrees | float |          |             |
+
 
 ##### add_scale
 
@@ -195,9 +205,10 @@ canvas.add_scale ( scale : ksp::math::Vec2 ) -> ksp::ui::Scale2D
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-scale | ksp::math::Vec2 |  | 
+| Name  | Type            | Optional | Description |
+| ----- | --------------- | -------- | ----------- |
+| scale | ksp::math::Vec2 |          |             |
+
 
 ##### add_text
 
@@ -214,14 +225,15 @@ canvas.add_text ( position : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-position | ksp::math::Vec2 |  | 
-text | string |  | 
-fontSize | float |  | 
-color | ksp::console::RgbaColor |  | 
-degrees | float | x | 
-pivot | ksp::math::Vec2 | x | 
+| Name     | Type                    | Optional | Description |
+| -------- | ----------------------- | -------- | ----------- |
+| position | ksp::math::Vec2         |          |             |
+| text     | string                  |          |             |
+| fontSize | float                   |          |             |
+| color    | ksp::console::RgbaColor |          |             |
+| degrees  | float                   | x        |             |
+| pivot    | ksp::math::Vec2         | x        |             |
+
 
 ##### add_translate
 
@@ -233,9 +245,10 @@ canvas.add_translate ( translate : ksp::math::Vec2 ) -> ksp::ui::Translate2D
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-translate | ksp::math::Vec2 |  | 
+| Name      | Type            | Optional | Description |
+| --------- | --------------- | -------- | ----------- |
+| translate | ksp::math::Vec2 |          |             |
+
 
 ##### add_value_raster
 
@@ -252,14 +265,15 @@ canvas.add_value_raster ( point1 : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-point1 | ksp::math::Vec2 |  | 
-point2 | ksp::math::Vec2 |  | 
-values | float[] |  | 
-width | int |  | 
-height | int |  | 
-gradientWrapper | ksp::ui::Gradient |  | 
+| Name            | Type              | Optional | Description |
+| --------------- | ----------------- | -------- | ----------- |
+| point1          | ksp::math::Vec2   |          |             |
+| point2          | ksp::math::Vec2   |          |             |
+| values          | float[]           |          |             |
+| width           | int               |          |             |
+| height          | int               |          |             |
+| gradientWrapper | ksp::ui::Gradient |          |             |
+
 
 ##### clear
 
@@ -284,12 +298,13 @@ Represents the console window
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-is_closed | bool | R/O | Check if the console window is closed 
-min_size | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/O | Get minimum size of window 
-position | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | Get or change position of window 
-size | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | Get or change size of window 
+| Name      | Type                                           | Read-only | Description                            |
+| --------- | ---------------------------------------------- | --------- | -------------------------------------- |
+| is_closed | bool                                           | R/O       | Check if the console window is closed  |
+| min_size  | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/O       | Get minimum size of window             |
+| position  | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W       | Get or change position of window       |
+| size      | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W       | Get or change size of window           |
+
 
 #### Methods
 
@@ -339,11 +354,12 @@ Add button to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-label | string |  | 
-align | ksp::ui::Align | x | Alignment of the button in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| label   | string         |          |                                                                      |
+| align   | ksp::ui::Align | x        | Alignment of the button in its parent container                      |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_canvas
 
@@ -359,12 +375,13 @@ Add canvas to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-minWidth | float |  | Minimum width of the canvas
-minHeight | float |  | Minimum height of the canvas
-align | ksp::ui::Align | x | Alignment of the canvas in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name      | Type           | Optional | Description                                                          |
+| --------- | -------------- | -------- | -------------------------------------------------------------------- |
+| minWidth  | float          |          | Minimum width of the canvas                                          |
+| minHeight | float          |          | Minimum height of the canvas                                         |
+| align     | ksp::ui::Align | x        | Alignment of the canvas in its parent container                      |
+| stretch   | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_float_input
 
@@ -378,10 +395,11 @@ Add float input field to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-align | ksp::ui::Align | x | Alignment of the input field in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| align   | ksp::ui::Align | x        | Alignment of the input field in its parent container                 |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_horizontal
 
@@ -396,11 +414,12 @@ Add sub container with horizontal layout to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-gap | float | x | Gap between each element of the container
-align | ksp::ui::Align | x | Alignment of the sub container in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| gap     | float          | x        | Gap between each element of the container                            |
+| align   | ksp::ui::Align | x        | Alignment of the sub container in its parent container               |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_horizontal_panel
 
@@ -415,11 +434,12 @@ Add sub panel with horizontal layout to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-gap | float | x | Gap between each element of the panel
-align | ksp::ui::Align | x | Alignment of the panel in its parent container
-stretch | float | x | 
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| gap     | float          | x        | Gap between each element of the panel                                |
+| align   | ksp::ui::Align | x        | Alignment of the panel in its parent container                       |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_horizontal_slider
 
@@ -435,12 +455,13 @@ Add horizontal slider to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-min | float |  | Minimum value of the slider
-max | float |  | Maximum value of the slider
-align | ksp::ui::Align | x | Alignment of the slider in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| min     | float          |          | Minimum value of the slider                                          |
+| max     | float          |          | Maximum value of the slider                                          |
+| align   | ksp::ui::Align | x        | Alignment of the slider in its parent container                      |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_int_input
 
@@ -454,10 +475,11 @@ Add integer input field to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-align | ksp::ui::Align | x | Alignment of the input field in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| align   | ksp::ui::Align | x        | Alignment of the input field in its parent container                 |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_label
 
@@ -472,11 +494,12 @@ Add label to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-label | string |  | 
-align | ksp::ui::Align | x | Alignment of the label in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| label   | string         |          |                                                                      |
+| align   | ksp::ui::Align | x        | Alignment of the label in its parent container                       |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_spacer
 
@@ -490,10 +513,11 @@ Add empty space between elements
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-size | float |  | Minimum amount of space between elements
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type  | Optional | Description                                                          |
+| ------- | ----- | -------- | -------------------------------------------------------------------- |
+| size    | float |          | Minimum amount of space between elements                             |
+| stretch | float | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_string_input
 
@@ -507,10 +531,11 @@ Add string input field to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-align | ksp::ui::Align | x | Alignment of the input field in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| align   | ksp::ui::Align | x        | Alignment of the input field in its parent container                 |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_toggle
 
@@ -525,11 +550,12 @@ Add toggle to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-label | string |  | 
-align | ksp::ui::Align | x | Alignment of the toggle in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| label   | string         |          |                                                                      |
+| align   | ksp::ui::Align | x        | Alignment of the toggle in its parent container                      |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_vertical
 
@@ -544,11 +570,12 @@ Add sub container with vertical layout to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-gap | float | x | Gap between each element of the container
-align | ksp::ui::Align | x | Alignment of the sub container in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| gap     | float          | x        | Gap between each element of the container                            |
+| align   | ksp::ui::Align | x        | Alignment of the sub container in its parent container               |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_vertical_panel
 
@@ -563,11 +590,36 @@ Add sub panel with vertical layout to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-gap | float | x | Gap between each element of the panel
-align | ksp::ui::Align | x | Alignment of the panel in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| gap     | float          | x        | Gap between each element of the panel                                |
+| align   | ksp::ui::Align | x        | Alignment of the panel in its parent container                       |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
+
+##### add_vertical_scroll
+
+```rust
+container.add_vertical_scroll ( minWidth : float,
+                                minHeight : float,
+                                gap : float,
+                                align : ksp::ui::Align,
+                                stretch : float ) -> ksp::ui::Container
+```
+
+Add vertical scroll view to the container
+
+
+Parameters
+
+| Name      | Type           | Optional | Description                                                          |
+| --------- | -------------- | -------- | -------------------------------------------------------------------- |
+| minWidth  | float          |          | Minimum width of the scroll view                                     |
+| minHeight | float          |          | Minimum height of the scroll view                                    |
+| gap       | float          | x        | Gap between each element of the panel                                |
+| align     | ksp::ui::Align | x        | Alignment of the panel in its parent container                       |
+| stretch   | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### remove
 
@@ -583,11 +635,12 @@ container.remove ( ) -> Unit
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-enabled | bool | R/W | 
-font_size | float | R/W | 
-value | float | R/W | 
+| Name      | Type  | Read-only | Description |
+| --------- | ----- | --------- | ----------- |
+| enabled   | bool  | R/W       |             |
+| font_size | float | R/W       |             |
+| value     | float | R/W       |             |
+
 
 #### Methods
 
@@ -601,9 +654,10 @@ floatinputfield.bind ( boundValue : Cell<T> ) -> ksp::ui::FloatInputField
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-boundValue | Cell<T> |  | 
+| Name       | Type    | Optional | Description |
+| ---------- | ------- | -------- | ----------- |
+| boundValue | Cell<T> |          |             |
+
 
 ##### on_change
 
@@ -615,9 +669,10 @@ floatinputfield.on_change ( onChange : sync fn(float) -> Unit ) -> Unit
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-onChange | sync fn(float) -> Unit |  | 
+| Name     | Type                   | Optional | Description |
+| -------- | ---------------------- | -------- | ----------- |
+| onChange | sync fn(float) -> Unit |          |             |
+
 
 ##### remove
 
@@ -644,10 +699,11 @@ gradient.add_color ( value : float,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-value | float |  | 
-color | ksp::console::RgbaColor |  | 
+| Name  | Type                    | Optional | Description |
+| ----- | ----------------------- | -------- | ----------- |
+| value | float                   |          |             |
+| color | ksp::console::RgbaColor |          |             |
+
 
 ### IntInputField
 
@@ -655,11 +711,12 @@ color | ksp::console::RgbaColor |  |
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-enabled | bool | R/W | 
-font_size | float | R/W | 
-value | int | R/W | 
+| Name      | Type  | Read-only | Description |
+| --------- | ----- | --------- | ----------- |
+| enabled   | bool  | R/W       |             |
+| font_size | float | R/W       |             |
+| value     | int   | R/W       |             |
+
 
 #### Methods
 
@@ -673,9 +730,10 @@ intinputfield.bind ( boundValue : Cell<T> ) -> ksp::ui::IntInputField
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-boundValue | Cell<T> |  | 
+| Name       | Type    | Optional | Description |
+| ---------- | ------- | -------- | ----------- |
+| boundValue | Cell<T> |          |             |
+
 
 ##### on_change
 
@@ -687,9 +745,10 @@ intinputfield.on_change ( onChange : sync fn(float) -> Unit ) -> Unit
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-onChange | sync fn(float) -> Unit |  | 
+| Name     | Type                   | Optional | Description |
+| -------- | ---------------------- | -------- | ----------- |
+| onChange | sync fn(float) -> Unit |          |             |
+
 
 ##### remove
 
@@ -705,10 +764,11 @@ intinputfield.remove ( ) -> Unit
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-font_size | float | R/W | 
-text | string | R/W | 
+| Name      | Type   | Read-only | Description |
+| --------- | ------ | --------- | ----------- |
+| font_size | float  | R/W       |             |
+| text      | string | R/W       |             |
+
 
 #### Methods
 
@@ -723,10 +783,11 @@ label.bind ( boundValue : Cell<T>,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-boundValue | Cell<T> |  | 
-format | string | x | 
+| Name       | Type    | Optional | Description |
+| ---------- | ------- | -------- | ----------- |
+| boundValue | Cell<T> |          |             |
+| format     | string  | x        |             |
+
 
 ##### remove
 
@@ -742,12 +803,13 @@ label.remove ( ) -> Unit
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-closed | bool | R/W | 
-points | [ksp::math::Vec2](/reference/ksp/math.md#vec2)[] | R/W | 
-stroke_color | [ksp::console::RgbaColor](/reference/ksp/console.md#rgbacolor) | R/W | 
-thickness | float | R/W | 
+| Name         | Type                                                           | Read-only | Description |
+| ------------ | -------------------------------------------------------------- | --------- | ----------- |
+| closed       | bool                                                           | R/W       |             |
+| points       | [ksp::math::Vec2](/reference/ksp/math.md#vec2)[]               | R/W       |             |
+| stroke_color | [ksp::console::RgbaColor](/reference/ksp/console.md#rgbacolor) | R/W       |             |
+| thickness    | float                                                          | R/W       |             |
+
 
 ### PixelLine2D
 
@@ -755,11 +817,12 @@ thickness | float | R/W |
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-closed | bool | R/W | 
-points | [ksp::math::Vec2](/reference/ksp/math.md#vec2)[] | R/W | 
-stroke_color | [ksp::console::RgbaColor](/reference/ksp/console.md#rgbacolor) | R/W | 
+| Name         | Type                                                           | Read-only | Description |
+| ------------ | -------------------------------------------------------------- | --------- | ----------- |
+| closed       | bool                                                           | R/W       |             |
+| points       | [ksp::math::Vec2](/reference/ksp/math.md#vec2)[]               | R/W       |             |
+| stroke_color | [ksp::console::RgbaColor](/reference/ksp/console.md#rgbacolor) | R/W       |             |
+
 
 ### Polygon2D
 
@@ -767,10 +830,11 @@ stroke_color | [ksp::console::RgbaColor](/reference/ksp/console.md#rgbacolor) | 
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-fill_color | [ksp::console::RgbaColor](/reference/ksp/console.md#rgbacolor) | R/W | 
-points | [ksp::math::Vec2](/reference/ksp/math.md#vec2)[] | R/W | 
+| Name       | Type                                                           | Read-only | Description |
+| ---------- | -------------------------------------------------------------- | --------- | ----------- |
+| fill_color | [ksp::console::RgbaColor](/reference/ksp/console.md#rgbacolor) | R/W       |             |
+| points     | [ksp::math::Vec2](/reference/ksp/math.md#vec2)[]               | R/W       |             |
+
 
 ### Rect2D
 
@@ -778,11 +842,12 @@ points | [ksp::math::Vec2](/reference/ksp/math.md#vec2)[] | R/W |
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-fill_color | [ksp::console::RgbaColor](/reference/ksp/console.md#rgbacolor) | R/W | 
-point1 | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | 
-point2 | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | 
+| Name       | Type                                                           | Read-only | Description |
+| ---------- | -------------------------------------------------------------- | --------- | ----------- |
+| fill_color | [ksp::console::RgbaColor](/reference/ksp/console.md#rgbacolor) | R/W       |             |
+| point1     | [ksp::math::Vec2](/reference/ksp/math.md#vec2)                 | R/W       |             |
+| point2     | [ksp::math::Vec2](/reference/ksp/math.md#vec2)                 | R/W       |             |
+
 
 ### Rotate2D
 
@@ -790,10 +855,11 @@ point2 | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W |
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-degrees | float | R/W | 
-pivot | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | 
+| Name    | Type                                           | Read-only | Description |
+| ------- | ---------------------------------------------- | --------- | ----------- |
+| degrees | float                                          | R/W       |             |
+| pivot   | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W       |             |
+
 
 #### Methods
 
@@ -810,12 +876,13 @@ rotate2d.add_line ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-strokeColor | ksp::console::RgbaColor |  | 
-closed | bool | x | 
-thickness | float | x | 
+| Name        | Type                    | Optional | Description |
+| ----------- | ----------------------- | -------- | ----------- |
+| points      | ksp::math::Vec2[]       |          |             |
+| strokeColor | ksp::console::RgbaColor |          |             |
+| closed      | bool                    | x        |             |
+| thickness   | float                   | x        |             |
+
 
 ##### add_pixel_line
 
@@ -829,11 +896,12 @@ rotate2d.add_pixel_line ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-strokeColor | ksp::console::RgbaColor |  | 
-closed | bool | x | 
+| Name        | Type                    | Optional | Description |
+| ----------- | ----------------------- | -------- | ----------- |
+| points      | ksp::math::Vec2[]       |          |             |
+| strokeColor | ksp::console::RgbaColor |          |             |
+| closed      | bool                    | x        |             |
+
 
 ##### add_polygon
 
@@ -846,10 +914,11 @@ rotate2d.add_polygon ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-fillColor | ksp::console::RgbaColor |  | 
+| Name      | Type                    | Optional | Description |
+| --------- | ----------------------- | -------- | ----------- |
+| points    | ksp::math::Vec2[]       |          |             |
+| fillColor | ksp::console::RgbaColor |          |             |
+
 
 ##### add_rect
 
@@ -863,11 +932,12 @@ rotate2d.add_rect ( point1 : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-point1 | ksp::math::Vec2 |  | 
-point2 | ksp::math::Vec2 |  | 
-fillColor | ksp::console::RgbaColor |  | 
+| Name      | Type                    | Optional | Description |
+| --------- | ----------------------- | -------- | ----------- |
+| point1    | ksp::math::Vec2         |          |             |
+| point2    | ksp::math::Vec2         |          |             |
+| fillColor | ksp::console::RgbaColor |          |             |
+
 
 ##### add_rotate
 
@@ -879,9 +949,10 @@ rotate2d.add_rotate ( degrees : float ) -> ksp::ui::Rotate2D
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-degrees | float |  | 
+| Name    | Type  | Optional | Description |
+| ------- | ----- | -------- | ----------- |
+| degrees | float |          |             |
+
 
 ##### add_scale
 
@@ -893,9 +964,10 @@ rotate2d.add_scale ( scale : ksp::math::Vec2 ) -> ksp::ui::Scale2D
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-scale | ksp::math::Vec2 |  | 
+| Name  | Type            | Optional | Description |
+| ----- | --------------- | -------- | ----------- |
+| scale | ksp::math::Vec2 |          |             |
+
 
 ##### add_text
 
@@ -912,14 +984,15 @@ rotate2d.add_text ( position : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-position | ksp::math::Vec2 |  | 
-text | string |  | 
-fontSize | float |  | 
-color | ksp::console::RgbaColor |  | 
-degrees | float | x | 
-pivot | ksp::math::Vec2 | x | 
+| Name     | Type                    | Optional | Description |
+| -------- | ----------------------- | -------- | ----------- |
+| position | ksp::math::Vec2         |          |             |
+| text     | string                  |          |             |
+| fontSize | float                   |          |             |
+| color    | ksp::console::RgbaColor |          |             |
+| degrees  | float                   | x        |             |
+| pivot    | ksp::math::Vec2         | x        |             |
+
 
 ##### add_translate
 
@@ -931,9 +1004,10 @@ rotate2d.add_translate ( translate : ksp::math::Vec2 ) -> ksp::ui::Translate2D
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-translate | ksp::math::Vec2 |  | 
+| Name      | Type            | Optional | Description |
+| --------- | --------------- | -------- | ----------- |
+| translate | ksp::math::Vec2 |          |             |
+
 
 ##### add_value_raster
 
@@ -950,14 +1024,15 @@ rotate2d.add_value_raster ( point1 : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-point1 | ksp::math::Vec2 |  | 
-point2 | ksp::math::Vec2 |  | 
-values | float[] |  | 
-width | int |  | 
-height | int |  | 
-gradientWrapper | ksp::ui::Gradient |  | 
+| Name            | Type              | Optional | Description |
+| --------------- | ----------------- | -------- | ----------- |
+| point1          | ksp::math::Vec2   |          |             |
+| point2          | ksp::math::Vec2   |          |             |
+| values          | float[]           |          |             |
+| width           | int               |          |             |
+| height          | int               |          |             |
+| gradientWrapper | ksp::ui::Gradient |          |             |
+
 
 ##### clear
 
@@ -973,10 +1048,11 @@ rotate2d.clear ( ) -> Unit
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-pivot | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | 
-scale | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | 
+| Name  | Type                                           | Read-only | Description |
+| ----- | ---------------------------------------------- | --------- | ----------- |
+| pivot | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W       |             |
+| scale | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W       |             |
+
 
 #### Methods
 
@@ -993,12 +1069,13 @@ scale2d.add_line ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-strokeColor | ksp::console::RgbaColor |  | 
-closed | bool | x | 
-thickness | float | x | 
+| Name        | Type                    | Optional | Description |
+| ----------- | ----------------------- | -------- | ----------- |
+| points      | ksp::math::Vec2[]       |          |             |
+| strokeColor | ksp::console::RgbaColor |          |             |
+| closed      | bool                    | x        |             |
+| thickness   | float                   | x        |             |
+
 
 ##### add_pixel_line
 
@@ -1012,11 +1089,12 @@ scale2d.add_pixel_line ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-strokeColor | ksp::console::RgbaColor |  | 
-closed | bool | x | 
+| Name        | Type                    | Optional | Description |
+| ----------- | ----------------------- | -------- | ----------- |
+| points      | ksp::math::Vec2[]       |          |             |
+| strokeColor | ksp::console::RgbaColor |          |             |
+| closed      | bool                    | x        |             |
+
 
 ##### add_polygon
 
@@ -1029,10 +1107,11 @@ scale2d.add_polygon ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-fillColor | ksp::console::RgbaColor |  | 
+| Name      | Type                    | Optional | Description |
+| --------- | ----------------------- | -------- | ----------- |
+| points    | ksp::math::Vec2[]       |          |             |
+| fillColor | ksp::console::RgbaColor |          |             |
+
 
 ##### add_rect
 
@@ -1046,11 +1125,12 @@ scale2d.add_rect ( point1 : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-point1 | ksp::math::Vec2 |  | 
-point2 | ksp::math::Vec2 |  | 
-fillColor | ksp::console::RgbaColor |  | 
+| Name      | Type                    | Optional | Description |
+| --------- | ----------------------- | -------- | ----------- |
+| point1    | ksp::math::Vec2         |          |             |
+| point2    | ksp::math::Vec2         |          |             |
+| fillColor | ksp::console::RgbaColor |          |             |
+
 
 ##### add_rotate
 
@@ -1062,9 +1142,10 @@ scale2d.add_rotate ( degrees : float ) -> ksp::ui::Rotate2D
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-degrees | float |  | 
+| Name    | Type  | Optional | Description |
+| ------- | ----- | -------- | ----------- |
+| degrees | float |          |             |
+
 
 ##### add_scale
 
@@ -1076,9 +1157,10 @@ scale2d.add_scale ( scale : ksp::math::Vec2 ) -> ksp::ui::Scale2D
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-scale | ksp::math::Vec2 |  | 
+| Name  | Type            | Optional | Description |
+| ----- | --------------- | -------- | ----------- |
+| scale | ksp::math::Vec2 |          |             |
+
 
 ##### add_text
 
@@ -1095,14 +1177,15 @@ scale2d.add_text ( position : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-position | ksp::math::Vec2 |  | 
-text | string |  | 
-fontSize | float |  | 
-color | ksp::console::RgbaColor |  | 
-degrees | float | x | 
-pivot | ksp::math::Vec2 | x | 
+| Name     | Type                    | Optional | Description |
+| -------- | ----------------------- | -------- | ----------- |
+| position | ksp::math::Vec2         |          |             |
+| text     | string                  |          |             |
+| fontSize | float                   |          |             |
+| color    | ksp::console::RgbaColor |          |             |
+| degrees  | float                   | x        |             |
+| pivot    | ksp::math::Vec2         | x        |             |
+
 
 ##### add_translate
 
@@ -1114,9 +1197,10 @@ scale2d.add_translate ( translate : ksp::math::Vec2 ) -> ksp::ui::Translate2D
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-translate | ksp::math::Vec2 |  | 
+| Name      | Type            | Optional | Description |
+| --------- | --------------- | -------- | ----------- |
+| translate | ksp::math::Vec2 |          |             |
+
 
 ##### add_value_raster
 
@@ -1133,14 +1217,15 @@ scale2d.add_value_raster ( point1 : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-point1 | ksp::math::Vec2 |  | 
-point2 | ksp::math::Vec2 |  | 
-values | float[] |  | 
-width | int |  | 
-height | int |  | 
-gradientWrapper | ksp::ui::Gradient |  | 
+| Name            | Type              | Optional | Description |
+| --------------- | ----------------- | -------- | ----------- |
+| point1          | ksp::math::Vec2   |          |             |
+| point2          | ksp::math::Vec2   |          |             |
+| values          | float[]           |          |             |
+| width           | int               |          |             |
+| height          | int               |          |             |
+| gradientWrapper | ksp::ui::Gradient |          |             |
+
 
 ##### clear
 
@@ -1156,10 +1241,11 @@ scale2d.clear ( ) -> Unit
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-enabled | bool | R/W | 
-value | float | R/W | 
+| Name    | Type  | Read-only | Description |
+| ------- | ----- | --------- | ----------- |
+| enabled | bool  | R/W       |             |
+| value   | float | R/W       |             |
+
 
 #### Methods
 
@@ -1173,9 +1259,10 @@ slider.bind ( boundValue : Cell<T> ) -> ksp::ui::Slider
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-boundValue | Cell<T> |  | 
+| Name       | Type    | Optional | Description |
+| ---------- | ------- | -------- | ----------- |
+| boundValue | Cell<T> |          |             |
+
 
 ##### on_change
 
@@ -1187,9 +1274,10 @@ slider.on_change ( onChange : sync fn(float) -> Unit ) -> Unit
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-onChange | sync fn(float) -> Unit |  | 
+| Name     | Type                   | Optional | Description |
+| -------- | ---------------------- | -------- | ----------- |
+| onChange | sync fn(float) -> Unit |          |             |
+
 
 ##### remove
 
@@ -1205,11 +1293,12 @@ slider.remove ( ) -> Unit
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-enabled | bool | R/W | 
-font_size | float | R/W | 
-value | string | R/W | 
+| Name      | Type   | Read-only | Description |
+| --------- | ------ | --------- | ----------- |
+| enabled   | bool   | R/W       |             |
+| font_size | float  | R/W       |             |
+| value     | string | R/W       |             |
+
 
 #### Methods
 
@@ -1223,9 +1312,10 @@ stringinputfield.bind ( boundValue : Cell<T> ) -> ksp::ui::StringInputField
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-boundValue | Cell<T> |  | 
+| Name       | Type    | Optional | Description |
+| ---------- | ------- | -------- | ----------- |
+| boundValue | Cell<T> |          |             |
+
 
 ##### on_change
 
@@ -1237,9 +1327,10 @@ stringinputfield.on_change ( onChange : sync fn(string) -> Unit ) -> Unit
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-onChange | sync fn(string) -> Unit |  | 
+| Name     | Type                    | Optional | Description |
+| -------- | ----------------------- | -------- | ----------- |
+| onChange | sync fn(string) -> Unit |          |             |
+
 
 ##### remove
 
@@ -1255,14 +1346,15 @@ stringinputfield.remove ( ) -> Unit
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-color | [ksp::console::RgbaColor](/reference/ksp/console.md#rgbacolor) | R/W | 
-degrees | float | R/W | 
-font_size | float | R/W | 
-pivot | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | 
-position | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | 
-text | string | R/W | 
+| Name      | Type                                                           | Read-only | Description |
+| --------- | -------------------------------------------------------------- | --------- | ----------- |
+| color     | [ksp::console::RgbaColor](/reference/ksp/console.md#rgbacolor) | R/W       |             |
+| degrees   | float                                                          | R/W       |             |
+| font_size | float                                                          | R/W       |             |
+| pivot     | [ksp::math::Vec2](/reference/ksp/math.md#vec2)                 | R/W       |             |
+| position  | [ksp::math::Vec2](/reference/ksp/math.md#vec2)                 | R/W       |             |
+| text      | string                                                         | R/W       |             |
+
 
 ### Toggle
 
@@ -1270,12 +1362,13 @@ text | string | R/W |
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-enabled | bool | R/W | 
-font_size | float | R/W | 
-label | string | R/W | 
-value | bool | R/W | 
+| Name      | Type   | Read-only | Description |
+| --------- | ------ | --------- | ----------- |
+| enabled   | bool   | R/W       |             |
+| font_size | float  | R/W       |             |
+| label     | string | R/W       |             |
+| value     | bool   | R/W       |             |
+
 
 #### Methods
 
@@ -1289,9 +1382,10 @@ toggle.bind ( boundValue : Cell<T> ) -> ksp::ui::Toggle
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-boundValue | Cell<T> |  | 
+| Name       | Type    | Optional | Description |
+| ---------- | ------- | -------- | ----------- |
+| boundValue | Cell<T> |          |             |
+
 
 ##### on_change
 
@@ -1303,9 +1397,10 @@ toggle.on_change ( onChange : sync fn(bool) -> Unit ) -> Unit
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-onChange | sync fn(bool) -> Unit |  | 
+| Name     | Type                  | Optional | Description |
+| -------- | --------------------- | -------- | ----------- |
+| onChange | sync fn(bool) -> Unit |          |             |
+
 
 ##### remove
 
@@ -1321,9 +1416,10 @@ toggle.remove ( ) -> Unit
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-translate | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | 
+| Name      | Type                                           | Read-only | Description |
+| --------- | ---------------------------------------------- | --------- | ----------- |
+| translate | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W       |             |
+
 
 #### Methods
 
@@ -1340,12 +1436,13 @@ translate2d.add_line ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-strokeColor | ksp::console::RgbaColor |  | 
-closed | bool | x | 
-thickness | float | x | 
+| Name        | Type                    | Optional | Description |
+| ----------- | ----------------------- | -------- | ----------- |
+| points      | ksp::math::Vec2[]       |          |             |
+| strokeColor | ksp::console::RgbaColor |          |             |
+| closed      | bool                    | x        |             |
+| thickness   | float                   | x        |             |
+
 
 ##### add_pixel_line
 
@@ -1359,11 +1456,12 @@ translate2d.add_pixel_line ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-strokeColor | ksp::console::RgbaColor |  | 
-closed | bool | x | 
+| Name        | Type                    | Optional | Description |
+| ----------- | ----------------------- | -------- | ----------- |
+| points      | ksp::math::Vec2[]       |          |             |
+| strokeColor | ksp::console::RgbaColor |          |             |
+| closed      | bool                    | x        |             |
+
 
 ##### add_polygon
 
@@ -1376,10 +1474,11 @@ translate2d.add_polygon ( points : ksp::math::Vec2[],
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-points | ksp::math::Vec2[] |  | 
-fillColor | ksp::console::RgbaColor |  | 
+| Name      | Type                    | Optional | Description |
+| --------- | ----------------------- | -------- | ----------- |
+| points    | ksp::math::Vec2[]       |          |             |
+| fillColor | ksp::console::RgbaColor |          |             |
+
 
 ##### add_rect
 
@@ -1393,11 +1492,12 @@ translate2d.add_rect ( point1 : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-point1 | ksp::math::Vec2 |  | 
-point2 | ksp::math::Vec2 |  | 
-fillColor | ksp::console::RgbaColor |  | 
+| Name      | Type                    | Optional | Description |
+| --------- | ----------------------- | -------- | ----------- |
+| point1    | ksp::math::Vec2         |          |             |
+| point2    | ksp::math::Vec2         |          |             |
+| fillColor | ksp::console::RgbaColor |          |             |
+
 
 ##### add_rotate
 
@@ -1409,9 +1509,10 @@ translate2d.add_rotate ( degrees : float ) -> ksp::ui::Rotate2D
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-degrees | float |  | 
+| Name    | Type  | Optional | Description |
+| ------- | ----- | -------- | ----------- |
+| degrees | float |          |             |
+
 
 ##### add_scale
 
@@ -1423,9 +1524,10 @@ translate2d.add_scale ( scale : ksp::math::Vec2 ) -> ksp::ui::Scale2D
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-scale | ksp::math::Vec2 |  | 
+| Name  | Type            | Optional | Description |
+| ----- | --------------- | -------- | ----------- |
+| scale | ksp::math::Vec2 |          |             |
+
 
 ##### add_text
 
@@ -1442,14 +1544,15 @@ translate2d.add_text ( position : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-position | ksp::math::Vec2 |  | 
-text | string |  | 
-fontSize | float |  | 
-color | ksp::console::RgbaColor |  | 
-degrees | float | x | 
-pivot | ksp::math::Vec2 | x | 
+| Name     | Type                    | Optional | Description |
+| -------- | ----------------------- | -------- | ----------- |
+| position | ksp::math::Vec2         |          |             |
+| text     | string                  |          |             |
+| fontSize | float                   |          |             |
+| color    | ksp::console::RgbaColor |          |             |
+| degrees  | float                   | x        |             |
+| pivot    | ksp::math::Vec2         | x        |             |
+
 
 ##### add_translate
 
@@ -1461,9 +1564,10 @@ translate2d.add_translate ( translate : ksp::math::Vec2 ) -> ksp::ui::Translate2
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-translate | ksp::math::Vec2 |  | 
+| Name      | Type            | Optional | Description |
+| --------- | --------------- | -------- | ----------- |
+| translate | ksp::math::Vec2 |          |             |
+
 
 ##### add_value_raster
 
@@ -1480,14 +1584,15 @@ translate2d.add_value_raster ( point1 : ksp::math::Vec2,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-point1 | ksp::math::Vec2 |  | 
-point2 | ksp::math::Vec2 |  | 
-values | float[] |  | 
-width | int |  | 
-height | int |  | 
-gradientWrapper | ksp::ui::Gradient |  | 
+| Name            | Type              | Optional | Description |
+| --------------- | ----------------- | -------- | ----------- |
+| point1          | ksp::math::Vec2   |          |             |
+| point2          | ksp::math::Vec2   |          |             |
+| values          | float[]           |          |             |
+| width           | int               |          |             |
+| height          | int               |          |             |
+| gradientWrapper | ksp::ui::Gradient |          |             |
+
 
 ##### clear
 
@@ -1503,14 +1608,15 @@ translate2d.clear ( ) -> Unit
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-gradient | [ksp::ui::Gradient](/reference/ksp/ui.md#gradient) | R/W | 
-point1 | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | 
-point2 | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | 
-raster_height | int | R/O | 
-raster_width | int | R/O | 
-values | float[] | R/W | 
+| Name          | Type                                               | Read-only | Description |
+| ------------- | -------------------------------------------------- | --------- | ----------- |
+| gradient      | [ksp::ui::Gradient](/reference/ksp/ui.md#gradient) | R/W       |             |
+| point1        | [ksp::math::Vec2](/reference/ksp/math.md#vec2)     | R/W       |             |
+| point2        | [ksp::math::Vec2](/reference/ksp/math.md#vec2)     | R/W       |             |
+| raster_height | int                                                | R/O       |             |
+| raster_width  | int                                                | R/O       |             |
+| values        | float[]                                            | R/W       |             |
+
 
 ### Window
 
@@ -1518,12 +1624,13 @@ values | float[] | R/W |
 
 #### Fields
 
-Name | Type | Read-only | Description
---- | --- | --- | ---
-is_closed | bool | R/O | Check if the window has been closed (either be user or script) 
-min_size | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/O | Get minimum size of window 
-position | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | Get or change position of window 
-size | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W | Get or change size of window 
+| Name      | Type                                           | Read-only | Description                                                     |
+| --------- | ---------------------------------------------- | --------- | --------------------------------------------------------------- |
+| is_closed | bool                                           | R/O       | Check if the window has been closed (either be user or script)  |
+| min_size  | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/O       | Get minimum size of window                                      |
+| position  | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W       | Get or change position of window                                |
+| size      | [ksp::math::Vec2](/reference/ksp/math.md#vec2) | R/W       | Get or change size of window                                    |
+
 
 #### Methods
 
@@ -1540,11 +1647,12 @@ Add button to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-label | string |  | 
-align | ksp::ui::Align | x | Alignment of the button in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| label   | string         |          |                                                                      |
+| align   | ksp::ui::Align | x        | Alignment of the button in its parent container                      |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_canvas
 
@@ -1560,12 +1668,13 @@ Add canvas to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-minWidth | float |  | Minimum width of the canvas
-minHeight | float |  | Minimum height of the canvas
-align | ksp::ui::Align | x | Alignment of the canvas in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name      | Type           | Optional | Description                                                          |
+| --------- | -------------- | -------- | -------------------------------------------------------------------- |
+| minWidth  | float          |          | Minimum width of the canvas                                          |
+| minHeight | float          |          | Minimum height of the canvas                                         |
+| align     | ksp::ui::Align | x        | Alignment of the canvas in its parent container                      |
+| stretch   | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_float_input
 
@@ -1579,10 +1688,11 @@ Add float input field to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-align | ksp::ui::Align | x | Alignment of the input field in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| align   | ksp::ui::Align | x        | Alignment of the input field in its parent container                 |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_horizontal
 
@@ -1597,11 +1707,12 @@ Add sub container with horizontal layout to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-gap | float | x | Gap between each element of the container
-align | ksp::ui::Align | x | Alignment of the sub container in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| gap     | float          | x        | Gap between each element of the container                            |
+| align   | ksp::ui::Align | x        | Alignment of the sub container in its parent container               |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_horizontal_panel
 
@@ -1616,11 +1727,12 @@ Add sub panel with horizontal layout to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-gap | float | x | Gap between each element of the panel
-align | ksp::ui::Align | x | Alignment of the panel in its parent container
-stretch | float | x | 
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| gap     | float          | x        | Gap between each element of the panel                                |
+| align   | ksp::ui::Align | x        | Alignment of the panel in its parent container                       |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_horizontal_slider
 
@@ -1636,12 +1748,13 @@ Add horizontal slider to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-min | float |  | Minimum value of the slider
-max | float |  | Maximum value of the slider
-align | ksp::ui::Align | x | Alignment of the slider in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| min     | float          |          | Minimum value of the slider                                          |
+| max     | float          |          | Maximum value of the slider                                          |
+| align   | ksp::ui::Align | x        | Alignment of the slider in its parent container                      |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_int_input
 
@@ -1655,10 +1768,11 @@ Add integer input field to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-align | ksp::ui::Align | x | Alignment of the input field in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| align   | ksp::ui::Align | x        | Alignment of the input field in its parent container                 |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_label
 
@@ -1673,11 +1787,12 @@ Add label to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-label | string |  | 
-align | ksp::ui::Align | x | Alignment of the label in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| label   | string         |          |                                                                      |
+| align   | ksp::ui::Align | x        | Alignment of the label in its parent container                       |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_spacer
 
@@ -1691,10 +1806,11 @@ Add empty space between elements
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-size | float |  | Minimum amount of space between elements
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type  | Optional | Description                                                          |
+| ------- | ----- | -------- | -------------------------------------------------------------------- |
+| size    | float |          | Minimum amount of space between elements                             |
+| stretch | float | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_string_input
 
@@ -1708,10 +1824,11 @@ Add string input field to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-align | ksp::ui::Align | x | Alignment of the input field in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| align   | ksp::ui::Align | x        | Alignment of the input field in its parent container                 |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_toggle
 
@@ -1726,11 +1843,12 @@ Add toggle to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-label | string |  | 
-align | ksp::ui::Align | x | Alignment of the toggle in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| label   | string         |          |                                                                      |
+| align   | ksp::ui::Align | x        | Alignment of the toggle in its parent container                      |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_vertical
 
@@ -1745,11 +1863,12 @@ Add sub container with vertical layout to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-gap | float | x | Gap between each element of the container
-align | ksp::ui::Align | x | Alignment of the sub container in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| gap     | float          | x        | Gap between each element of the container                            |
+| align   | ksp::ui::Align | x        | Alignment of the sub container in its parent container               |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### add_vertical_panel
 
@@ -1764,11 +1883,36 @@ Add sub panel with vertical layout to the container
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-gap | float | x | Gap between each element of the panel
-align | ksp::ui::Align | x | Alignment of the panel in its parent container
-stretch | float | x | Relative amount of available space to acquire (beyond minimal space)
+| Name    | Type           | Optional | Description                                                          |
+| ------- | -------------- | -------- | -------------------------------------------------------------------- |
+| gap     | float          | x        | Gap between each element of the panel                                |
+| align   | ksp::ui::Align | x        | Alignment of the panel in its parent container                       |
+| stretch | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
+
+##### add_vertical_scroll
+
+```rust
+window.add_vertical_scroll ( minWidth : float,
+                             minHeight : float,
+                             gap : float,
+                             align : ksp::ui::Align,
+                             stretch : float ) -> ksp::ui::Container
+```
+
+Add vertical scroll view to the container
+
+
+Parameters
+
+| Name      | Type           | Optional | Description                                                          |
+| --------- | -------------- | -------- | -------------------------------------------------------------------- |
+| minWidth  | float          |          | Minimum width of the scroll view                                     |
+| minHeight | float          |          | Minimum height of the scroll view                                    |
+| gap       | float          | x        | Gap between each element of the panel                                |
+| align     | ksp::ui::Align | x        | Alignment of the panel in its parent container                       |
+| stretch   | float          | x        | Relative amount of available space to acquire (beyond minimal space) |
+
 
 ##### center
 
@@ -1799,10 +1943,10 @@ Resize window to its minimum size
 
 ## Constants
 
-Name | Type | Description
---- | --- | ---
-Align | ksp::ui::AlignConstants | Alignment of the element in off direction (horizontal for vertical container and vice versa)
-CONSOLE_WINDOW | ksp::ui::ConsoleWindow | Main console window 
+| Name           | Type                    | Description                                                                                  |
+| -------------- | ----------------------- | -------------------------------------------------------------------------------------------- |
+| Align          | ksp::ui::AlignConstants | Alignment of the element in off direction (horizontal for vertical container and vice versa) |
+| CONSOLE_WINDOW | ksp::ui::ConsoleWindow  | Main console window                                                                          |
 
 
 ## Functions
@@ -1819,10 +1963,11 @@ pub sync fn gradient ( start : ksp::console::RgbaColor,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-start | ksp::console::RgbaColor |  | 
-end | ksp::console::RgbaColor |  | 
+| Name  | Type                    | Optional | Description |
+| ----- | ----------------------- | -------- | ----------- |
+| start | ksp::console::RgbaColor |          |             |
+| end   | ksp::console::RgbaColor |          |             |
+
 
 ### open_centered_window
 
@@ -1836,11 +1981,12 @@ pub sync fn open_centered_window ( title : string,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-title | string |  | 
-width | float |  | 
-height | float |  | 
+| Name   | Type   | Optional | Description |
+| ------ | ------ | -------- | ----------- |
+| title  | string |          |             |
+| width  | float  |          |             |
+| height | float  |          |             |
+
 
 ### open_window
 
@@ -1856,13 +2002,14 @@ pub sync fn open_window ( title : string,
 
 Parameters
 
-Name | Type | Optional | Description
---- | --- | --- | ---
-title | string |  | 
-x | float |  | 
-y | float |  | 
-width | float |  | 
-height | float |  | 
+| Name   | Type   | Optional | Description |
+| ------ | ------ | -------- | ----------- |
+| title  | string |          |             |
+| x      | float  |          |             |
+| y      | float  |          |             |
+| width  | float  |          |             |
+| height | float  |          |             |
+
 
 ### screen_size
 

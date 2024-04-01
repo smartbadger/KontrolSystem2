@@ -1503,7 +1503,11 @@
         }
       },
       "assignableFromAny": false,
-      "assignableFrom": []
+      "assignableFrom": [],
+      "forInSource": {
+        "kind": "Builtin",
+        "name": "int"
+      }
     },
     "ArrayBuilder": {
       "name": "ArrayBuilder",
@@ -2199,6 +2203,21 @@
           "kind": "Standard",
           "module": "ksp::orbit",
           "name": "Orbit"
+        },
+        {
+          "kind": "Standard",
+          "module": "ksp::orbit",
+          "name": "OrbitPatch"
+        },
+        {
+          "kind": "Standard",
+          "module": "ksp::orbit",
+          "name": "Trajectory"
+        },
+        {
+          "kind": "Standard",
+          "module": "ksp::orbit",
+          "name": "Waypoint"
         },
         {
           "kind": "Standard",
@@ -3246,6 +3265,21 @@
           "kind": "Standard",
           "module": "ksp::orbit",
           "name": "Orbit"
+        },
+        {
+          "kind": "Standard",
+          "module": "ksp::orbit",
+          "name": "OrbitPatch"
+        },
+        {
+          "kind": "Standard",
+          "module": "ksp::orbit",
+          "name": "Trajectory"
+        },
+        {
+          "kind": "Standard",
+          "module": "ksp::orbit",
+          "name": "Waypoint"
         },
         {
           "kind": "Standard",
@@ -14073,6 +14107,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -14892,6 +14941,21 @@
                 "module": "ksp::math",
                 "name": "GlobalVector"
               }
+            },
+            "waypoints": {
+              "name": "waypoints",
+              "description": "List of all waypoints defined on the body\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Array",
+                "parameters": [
+                  {
+                    "kind": "Standard",
+                    "module": "ksp::orbit",
+                    "name": "Waypoint"
+                  }
+                ]
+              }
             }
           },
           "methods": {
@@ -15341,74 +15405,6 @@
                 "kind": "Standard",
                 "module": "ksp::orbit",
                 "name": "Body"
-              }
-            },
-            "start_ut": {
-              "name": "start_ut",
-              "description": "Universal time of the start of the orbit, in case it is an orbit-patch\n",
-              "readOnly": true,
-              "type": {
-                "kind": "Builtin",
-                "name": "float"
-              }
-            },
-            "end_ut": {
-              "name": "end_ut",
-              "description": "Universal time of the start of the orbit, in case it is an orbit-patch\n",
-              "readOnly": true,
-              "type": {
-                "kind": "Builtin",
-                "name": "float"
-              }
-            },
-            "start_transition": {
-              "name": "start_transition",
-              "description": "Get transition type at the beginning of the orbit patch\n",
-              "readOnly": true,
-              "type": {
-                "kind": "Standard",
-                "module": "ksp::orbit",
-                "name": "PatchTransitionType"
-              }
-            },
-            "end_transition": {
-              "name": "end_transition",
-              "description": "Get transition type at the end of the orbit patch\n",
-              "readOnly": true,
-              "type": {
-                "kind": "Standard",
-                "module": "ksp::orbit",
-                "name": "PatchTransitionType"
-              }
-            },
-            "previous_patch": {
-              "name": "previous_patch",
-              "description": "Get the previous orbit patch of the trajectory (if available)\n",
-              "readOnly": true,
-              "type": {
-                "kind": "Option",
-                "parameters": [
-                  {
-                    "kind": "Standard",
-                    "module": "ksp::orbit",
-                    "name": "Orbit"
-                  }
-                ]
-              }
-            },
-            "next_patch": {
-              "name": "next_patch",
-              "description": "Get the next orbit patch of the trajectory (if available)\n",
-              "readOnly": true,
-              "type": {
-                "kind": "Option",
-                "parameters": [
-                  {
-                    "kind": "Standard",
-                    "module": "ksp::orbit",
-                    "name": "Orbit"
-                  }
-                ]
               }
             },
             "apoapsis": {
@@ -16128,6 +16124,998 @@
                 "name": "float"
               }
             },
+            "true_anomaly_at_ut": {
+              "isAsync": false,
+              "name": "true_anomaly_at_ut",
+              "description": "The true anomaly of the orbit at a given universal type `ut`.\nThe vector is projected into the orbital plane and then the true anomaly is\ncomputed as the angle this vector makes with the vector pointing to the periapsis.\nThe returned value is always between 0 and 2pi.\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "ascending_node_true_anomaly": {
+              "isAsync": false,
+              "name": "ascending_node_true_anomaly",
+              "description": "Gives the true anomaly (in a's orbit) at which a crosses its ascending node with b's orbit.\nThe returned value is always between 0 and 360.\n",
+              "parameters": [
+                {
+                  "name": "b",
+                  "type": {
+                    "kind": "Standard",
+                    "module": "ksp::orbit",
+                    "name": "Orbit"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "descending_node_true_anomaly": {
+              "isAsync": false,
+              "name": "descending_node_true_anomaly",
+              "description": "Gives the true anomaly (in a's orbit) at which a crosses its descending node with b's orbit.\nThe returned value is always between 0 and 360.\n",
+              "parameters": [
+                {
+                  "name": "b",
+                  "type": {
+                    "kind": "Standard",
+                    "module": "ksp::orbit",
+                    "name": "Orbit"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "time_of_ascending_node": {
+              "isAsync": false,
+              "name": "time_of_ascending_node",
+              "description": "Returns the next time at which a will cross its ascending node with b.\nFor elliptical orbits this is a time between UT and UT + a.period.\nFor hyperbolic orbits this can be any time, including a time in the past if\nthe ascending node is in the past.\nNOTE: this function will throw an ArgumentException if a is a hyperbolic orbit and the ascending node\noccurs at a true anomaly that a does not actually ever attain.\nIf `ut` is omitted the current time will be used.\n",
+              "parameters": [
+                {
+                  "name": "b",
+                  "type": {
+                    "kind": "Standard",
+                    "module": "ksp::orbit",
+                    "name": "Orbit"
+                  },
+                  "hasDefault": false
+                },
+                {
+                  "name": "maybeUt",
+                  "type": {
+                    "kind": "Option",
+                    "parameters": [
+                      {
+                        "kind": "Builtin",
+                        "name": "float"
+                      }
+                    ]
+                  },
+                  "hasDefault": true
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "time_of_descending_node": {
+              "isAsync": false,
+              "name": "time_of_descending_node",
+              "description": "Returns the next time at which a will cross its descending node with b.\nFor elliptical orbits this is a time between UT and UT + a.period.\nFor hyperbolic orbits this can be any time, including a time in the past if\nthe descending node is in the past.\nNOTE: this function will throw an ArgumentException if a is a hyperbolic orbit and the descending node\noccurs at a true anomaly that a does not actually ever attain.\nIf `ut` is omitted the current time will be used\n",
+              "parameters": [
+                {
+                  "name": "b",
+                  "type": {
+                    "kind": "Standard",
+                    "module": "ksp::orbit",
+                    "name": "Orbit"
+                  },
+                  "hasDefault": false
+                },
+                {
+                  "name": "maybeUt",
+                  "type": {
+                    "kind": "Option",
+                    "parameters": [
+                      {
+                        "kind": "Builtin",
+                        "name": "float"
+                      }
+                    ]
+                  },
+                  "hasDefault": true
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "to_string": {
+              "isAsync": false,
+              "name": "to_string",
+              "description": "Convert orbital parameters to string.\n",
+              "parameters": [],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "string"
+              }
+            },
+            "to_fixed": {
+              "isAsync": false,
+              "name": "to_fixed",
+              "description": "Convert orbital parameter to string using specified number of `decimals`\n",
+              "parameters": [
+                {
+                  "name": "decimals",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "int"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "string"
+              }
+            }
+          },
+          "assignableFromAny": false,
+          "assignableFrom": [
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            }
+          ]
+        },
+        "OrbitPatch": {
+          "name": "OrbitPatch",
+          "description": "Represents a orbit patch of a trajectory\n",
+          "fields": {
+            "trajectory": {
+              "name": "trajectory",
+              "description": "The trajectory this orbit patch belongs to\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Standard",
+                "module": "ksp::orbit",
+                "name": "Trajectory"
+              }
+            },
+            "start_ut": {
+              "name": "start_ut",
+              "description": "Universal time of the start of the orbit patch\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "end_ut": {
+              "name": "end_ut",
+              "description": "Universal time of the start of the orbit patch\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "start_transition": {
+              "name": "start_transition",
+              "description": "Get transition type at the beginning of the orbit patch\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Standard",
+                "module": "ksp::orbit",
+                "name": "PatchTransitionType"
+              }
+            },
+            "end_transition": {
+              "name": "end_transition",
+              "description": "Get transition type at the end of the orbit patch\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Standard",
+                "module": "ksp::orbit",
+                "name": "PatchTransitionType"
+              }
+            },
+            "previous_patch": {
+              "name": "previous_patch",
+              "description": "Get the previous orbit patch of the trajectory (if available)\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Option",
+                "parameters": [
+                  {
+                    "kind": "Standard",
+                    "module": "ksp::orbit",
+                    "name": "OrbitPatch"
+                  }
+                ]
+              }
+            },
+            "next_patch": {
+              "name": "next_patch",
+              "description": "Get the next orbit patch of the trajectory (if available)\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Option",
+                "parameters": [
+                  {
+                    "kind": "Standard",
+                    "module": "ksp::orbit",
+                    "name": "OrbitPatch"
+                  }
+                ]
+              }
+            },
+            "reference_body": {
+              "name": "reference_body",
+              "description": "The celestial body the orbit is referenced on.\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Standard",
+                "module": "ksp::orbit",
+                "name": "Body"
+              }
+            },
+            "apoapsis": {
+              "name": "apoapsis",
+              "description": "Apoapsis of the orbit above sealevel of the `reference_body`. Is not defined for a hyperbolic orbit\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Option",
+                "parameters": [
+                  {
+                    "kind": "Builtin",
+                    "name": "float"
+                  }
+                ]
+              }
+            },
+            "periapsis": {
+              "name": "periapsis",
+              "description": "Periapsis of the orbit above sealevel of the `reference_body`\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "apoapsis_radius": {
+              "name": "apoapsis_radius",
+              "description": "Radius of apoapsis of the orbit (i.e. from the center of the `reference_body'). Is not defined for a hyperbolic orbit\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Option",
+                "parameters": [
+                  {
+                    "kind": "Builtin",
+                    "name": "float"
+                  }
+                ]
+              }
+            },
+            "periapsis_radius": {
+              "name": "periapsis_radius",
+              "description": "Radius of periapsis of the orbit (i.e. from the center of the `reference_body')\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "semi_major_axis": {
+              "name": "semi_major_axis",
+              "description": "Semi major axis of the orbit.\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "inclination": {
+              "name": "inclination",
+              "description": "Inclination of the orbit in degree.\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "eccentricity": {
+              "name": "eccentricity",
+              "description": "Eccentricity of the orbit.\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "LAN": {
+              "name": "LAN",
+              "description": "Longitude of ascending node of the orbit in degree\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "epoch": {
+              "name": "epoch",
+              "description": "Orbit epoch.\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "argument_of_periapsis": {
+              "name": "argument_of_periapsis",
+              "description": "Argument of periapsis of the orbit.\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "mean_anomaly_at_epoch": {
+              "name": "mean_anomaly_at_epoch",
+              "description": "Mean anomaly of the orbit at `epoch`\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "mean_motion": {
+              "name": "mean_motion",
+              "description": "Mean motion of the orbit.\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "period": {
+              "name": "period",
+              "description": "Orbital period.\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "reference_frame": {
+              "name": "reference_frame",
+              "description": "Internal reference frame of the orbit.\nThis might be useful to compare numbers.\nNote: All relative vectors are in the celestial frame of the `reference_body` which might be different!\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "TransformFrame"
+              }
+            },
+            "orbit_normal": {
+              "name": "orbit_normal",
+              "description": "Normal vector perpendicular to orbital plane.\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "Vec3"
+              }
+            },
+            "relative_ascending_node": {
+              "name": "relative_ascending_node",
+              "description": "Get the relative position of the ascending node.\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "Vec3"
+              }
+            },
+            "relative_eccentricity_vector": {
+              "name": "relative_eccentricity_vector",
+              "description": "Get the relative eccentricity vector.\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "Vec3"
+              }
+            }
+          },
+          "methods": {
+            "relative_position": {
+              "isAsync": false,
+              "name": "relative_position",
+              "description": "Get relative position at a given universal time `ut`\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "Vec3"
+              }
+            },
+            "relative_position_for_true_anomaly": {
+              "isAsync": false,
+              "name": "relative_position_for_true_anomaly",
+              "description": "Get relative position for a given `trueAnomaly`\n",
+              "parameters": [
+                {
+                  "name": "trueAnomaly",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "Vec3"
+              }
+            },
+            "global_position_for_true_anomaly": {
+              "isAsync": false,
+              "name": "global_position_for_true_anomaly",
+              "description": "Get the coordinate independent position for a given `trueAnomaly`\n",
+              "parameters": [
+                {
+                  "name": "trueAnomaly",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "GlobalPosition"
+              }
+            },
+            "global_position": {
+              "isAsync": false,
+              "name": "global_position",
+              "description": "Get the coordinate independent position at a given universal time `ut`.\nNote: This takes the motion of the parent body into account.\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "GlobalPosition"
+              }
+            },
+            "global_relative_position": {
+              "isAsync": false,
+              "name": "global_relative_position",
+              "description": "Shorthand for `orbit.global_position(ut) - orbit.reference_body.orbit.global_position(ut)`\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "GlobalVector"
+              }
+            },
+            "global_velocity": {
+              "isAsync": false,
+              "name": "global_velocity",
+              "description": "Get the coordinate independent velocity at a given universal time `ut`.\nNote: This takes the motion of the parent body into account.\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "GlobalVelocity"
+              }
+            },
+            "orbital_velocity": {
+              "isAsync": false,
+              "name": "orbital_velocity",
+              "description": "Get the relative orbital velocity at a given universal time `ut`\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "Vec3"
+              }
+            },
+            "prograde": {
+              "isAsync": false,
+              "name": "prograde",
+              "description": "The relative prograde vector at a given universal time `ut`\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "Vec3"
+              }
+            },
+            "normal_plus": {
+              "isAsync": false,
+              "name": "normal_plus",
+              "description": "The relative normal-plus vector at a given universal time `ut`\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "Vec3"
+              }
+            },
+            "radial_plus": {
+              "isAsync": false,
+              "name": "radial_plus",
+              "description": "The relative radial-plus vector at a given universal time `ut`\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "Vec3"
+              }
+            },
+            "up": {
+              "isAsync": false,
+              "name": "up",
+              "description": "Relative up vector of the orbit at a given universal time `ut`\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "Vec3"
+              }
+            },
+            "radius": {
+              "isAsync": false,
+              "name": "radius",
+              "description": "Get the orbital radius (distance from center of body) at a given universal time `ut`\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "horizontal": {
+              "isAsync": false,
+              "name": "horizontal",
+              "description": "Relative horizontal vector at a given universal time `ut`\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "Vec3"
+              }
+            },
+            "perturbed_orbit": {
+              "isAsync": false,
+              "name": "perturbed_orbit",
+              "description": "Returns a new Orbit object that represents the result of applying a given relative `deltaV` to o at `ut`.\nNote: The resulting orbit is calculated as if the velocity change happens instantaneously, which might lead\nto unrealistic results for larger `deltaV`. The main use-case of this method is to be used as part of\nan orbit-optimization algorithm as it is quiet fast.\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                },
+                {
+                  "name": "dV",
+                  "type": {
+                    "kind": "Standard",
+                    "module": "ksp::math",
+                    "name": "Vec3"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::orbit",
+                "name": "Orbit"
+              }
+            },
+            "mean_anomaly_at_ut": {
+              "isAsync": false,
+              "name": "mean_anomaly_at_ut",
+              "description": "The mean anomaly of the orbit.\nFor elliptical orbits, the value return is always between 0 and 2pi.\nFor hyperbolic orbits, the value can be any number.\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "ut_at_mean_anomaly": {
+              "isAsync": false,
+              "name": "ut_at_mean_anomaly",
+              "description": "The next time at which the orbiting object will reach the given mean anomaly.\nFor elliptical orbits, this will be a time between UT and UT + o.period.\nFor hyperbolic orbits, this can be any time, including a time in the past, if the given mean anomaly occurred in the past\n",
+              "parameters": [
+                {
+                  "name": "meanAnomaly",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                },
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "get_mean_anomaly_at_eccentric_anomaly": {
+              "isAsync": false,
+              "name": "get_mean_anomaly_at_eccentric_anomaly",
+              "description": "Converts an eccentric anomaly into a mean anomaly.\nFor an elliptical orbit, the returned value is between 0 and 2pi.\nFor a hyperbolic orbit, the returned value is any number.\n",
+              "parameters": [
+                {
+                  "name": "ecc",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "get_eccentric_anomaly_at_true_anomaly": {
+              "isAsync": false,
+              "name": "get_eccentric_anomaly_at_true_anomaly",
+              "description": "Converts a true anomaly into an eccentric anomaly.\nFor elliptical orbits this returns a value between 0 and 2pi.\nFor hyperbolic orbits the returned value can be any number.\n",
+              "parameters": [
+                {
+                  "name": "trueAnomaly",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "time_of_true_anomaly": {
+              "isAsync": false,
+              "name": "time_of_true_anomaly",
+              "description": "Next time of a certain true anomaly after a given universal time `ut`.\nIf `ut` is omitted the current time will be used\n",
+              "parameters": [
+                {
+                  "name": "trueAnomaly",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                },
+                {
+                  "name": "maybeUt",
+                  "type": {
+                    "kind": "Option",
+                    "parameters": [
+                      {
+                        "kind": "Builtin",
+                        "name": "float"
+                      }
+                    ]
+                  },
+                  "hasDefault": true
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "next_periapsis_time": {
+              "isAsync": false,
+              "name": "next_periapsis_time",
+              "description": "The next time at which the orbiting object will be at periapsis after a given universal time `ut`.\nIf `ut` is omitted the current time will be used.\nFor elliptical orbits, this will be between `ut` and `ut` + Period.\nFor hyperbolic orbits, this can be any time, including a time in the past, if the periapsis is in the past.\n",
+              "parameters": [
+                {
+                  "name": "maybeUt",
+                  "type": {
+                    "kind": "Option",
+                    "parameters": [
+                      {
+                        "kind": "Builtin",
+                        "name": "float"
+                      }
+                    ]
+                  },
+                  "hasDefault": true
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "next_apoapsis_time": {
+              "isAsync": false,
+              "name": "next_apoapsis_time",
+              "description": "Returns the next time at which the orbiting object will be at apoapsis after a given universal time `ut`.\nIf `ut` is omitted the current time will be used.\nFor elliptical orbits, this will be between `ut` and `ut` + Period.\nFor hyperbolic orbits, this is undefined.\n",
+              "parameters": [
+                {
+                  "name": "maybeUt",
+                  "type": {
+                    "kind": "Option",
+                    "parameters": [
+                      {
+                        "kind": "Builtin",
+                        "name": "float"
+                      }
+                    ]
+                  },
+                  "hasDefault": true
+                }
+              ],
+              "returnType": {
+                "kind": "Option",
+                "parameters": [
+                  {
+                    "kind": "Builtin",
+                    "name": "float"
+                  }
+                ]
+              }
+            },
+            "true_anomaly_at_radius": {
+              "isAsync": false,
+              "name": "true_anomaly_at_radius",
+              "description": "Get the true anomaly of a radius.\nIf the radius is below the periapsis the true anomaly of the periapsis will be returned.\nIf it is above the apoapsis the true anomaly of the apoapsis is returned.\nThe returned value is always between 0 and 2pi.\n",
+              "parameters": [
+                {
+                  "name": "radius",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "next_time_of_radius": {
+              "isAsync": false,
+              "name": "next_time_of_radius",
+              "description": "Finds the next time at which the orbiting object will achieve a given `radius` from center of the body\nafter a given universal time `ut`.\nThis will be undefined if the specified `radius` is impossible for this orbit, otherwise:\nFor elliptical orbits this will be a time between `ut` and `ut` + period.\nFor hyperbolic orbits this can be any time. If the given radius will be achieved\nin the future then the next time at which that radius will be achieved will be returned.\nIf the given radius was only achieved in the past, then there are no guarantees\nabout which of the two times in the past will be returned.\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                },
+                {
+                  "name": "radius",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Option",
+                "parameters": [
+                  {
+                    "kind": "Builtin",
+                    "name": "float"
+                  }
+                ]
+              }
+            },
+            "synodic_period": {
+              "isAsync": false,
+              "name": "synodic_period",
+              "description": "Computes the period of the phase angle between orbiting objects of this orbit and and `other` orbit.\nFor noncircular orbits the time variation of the phase angle is only quasiperiodic\nand for high eccentricities and/or large relative inclinations, the relative motion is\nnot really periodic at all.\n",
+              "parameters": [
+                {
+                  "name": "other",
+                  "type": {
+                    "kind": "Standard",
+                    "module": "ksp::orbit",
+                    "name": "Orbit"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "true_anomaly_from_vector": {
+              "isAsync": false,
+              "name": "true_anomaly_from_vector",
+              "description": "Converts a relative direction, into a true anomaly.\nThe vector is projected into the orbital plane and then the true anomaly is\ncomputed as the angle this vector makes with the vector pointing to the periapsis.\nThe returned value is always between 0 and 2pi.\n",
+              "parameters": [
+                {
+                  "name": "vec",
+                  "type": {
+                    "kind": "Standard",
+                    "module": "ksp::math",
+                    "name": "Vec3"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "true_anomaly_at_ut": {
+              "isAsync": false,
+              "name": "true_anomaly_at_ut",
+              "description": "The true anomaly of the orbit at a given universal type `ut`.\nThe vector is projected into the orbital plane and then the true anomaly is\ncomputed as the angle this vector makes with the vector pointing to the periapsis.\nThe returned value is always between 0 and 2pi.\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
             "ascending_node_true_anomaly": {
               "isAsync": false,
               "name": "ascending_node_true_anomaly",
@@ -16266,6 +17254,456 @@
           },
           "assignableFromAny": false,
           "assignableFrom": []
+        },
+        "Trajectory": {
+          "name": "Trajectory",
+          "description": "Representation of a trajectory of a vessel that might has multiple orbit patches\n",
+          "fields": {
+            "length": {
+              "name": "length",
+              "description": "length",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "int"
+              }
+            },
+            "start_ut": {
+              "name": "start_ut",
+              "description": "Universal time of the start of the trajectory\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            },
+            "end_ut": {
+              "name": "end_ut",
+              "description": "Universal time of the end of the trajectory\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            }
+          },
+          "methods": {
+            "map": {
+              "isAsync": false,
+              "name": "map",
+              "description": "Map the content of the array",
+              "parameters": [
+                {
+                  "name": "mapper",
+                  "type": {
+                    "kind": "Function",
+                    "parameters": [
+                      {
+                        "kind": "Standard",
+                        "module": "ksp::orbit",
+                        "name": "OrbitPatch"
+                      }
+                    ],
+                    "returnType": {
+                      "kind": "Generic",
+                      "name": "U"
+                    },
+                    "isAsync": false
+                  },
+                  "hasDefault": false,
+                  "description": "Function to be applied on each element of the array"
+                }
+              ],
+              "returnType": {
+                "kind": "Array",
+                "parameters": [
+                  {
+                    "kind": "Generic",
+                    "name": "U"
+                  }
+                ]
+              }
+            },
+            "map_with_index": {
+              "isAsync": false,
+              "name": "map_with_index",
+              "description": "Map the content of the array",
+              "parameters": [
+                {
+                  "name": "mapper",
+                  "type": {
+                    "kind": "Function",
+                    "parameters": [
+                      {
+                        "kind": "Standard",
+                        "module": "ksp::orbit",
+                        "name": "OrbitPatch"
+                      },
+                      {
+                        "kind": "Builtin",
+                        "name": "int"
+                      }
+                    ],
+                    "returnType": {
+                      "kind": "Generic",
+                      "name": "U"
+                    },
+                    "isAsync": false
+                  },
+                  "hasDefault": false,
+                  "description": "Function to be applied on each element of the array including index of the element"
+                }
+              ],
+              "returnType": {
+                "kind": "Array",
+                "parameters": [
+                  {
+                    "kind": "Generic",
+                    "name": "U"
+                  }
+                ]
+              }
+            },
+            "flat_map": {
+              "isAsync": false,
+              "name": "flat_map",
+              "description": "Map the content of the array",
+              "parameters": [
+                {
+                  "name": "mapper",
+                  "type": {
+                    "kind": "Function",
+                    "parameters": [
+                      {
+                        "kind": "Standard",
+                        "module": "ksp::orbit",
+                        "name": "OrbitPatch"
+                      }
+                    ],
+                    "returnType": {
+                      "kind": "Array",
+                      "parameters": [
+                        {
+                          "kind": "Generic",
+                          "name": "U"
+                        }
+                      ]
+                    },
+                    "isAsync": false
+                  },
+                  "hasDefault": false,
+                  "description": "Function to be applied on each element of the array"
+                }
+              ],
+              "returnType": {
+                "kind": "Array",
+                "parameters": [
+                  {
+                    "kind": "Generic",
+                    "name": "U"
+                  }
+                ]
+              }
+            },
+            "filter": {
+              "isAsync": false,
+              "name": "filter",
+              "description": "Filter the content of the array by a `predicate",
+              "parameters": [
+                {
+                  "name": "predicate",
+                  "type": {
+                    "kind": "Function",
+                    "parameters": [
+                      {
+                        "kind": "Standard",
+                        "module": "ksp::orbit",
+                        "name": "OrbitPatch"
+                      }
+                    ],
+                    "returnType": {
+                      "kind": "Builtin",
+                      "name": "bool"
+                    },
+                    "isAsync": false
+                  },
+                  "hasDefault": false,
+                  "description": "Predicate function/check to be applied on each element of the array"
+                }
+              ],
+              "returnType": {
+                "kind": "Array",
+                "parameters": [
+                  {
+                    "kind": "Generic",
+                    "name": "T"
+                  }
+                ]
+              }
+            },
+            "filter_map": {
+              "isAsync": false,
+              "name": "filter_map",
+              "description": "Map the content of the array",
+              "parameters": [
+                {
+                  "name": "mapper",
+                  "type": {
+                    "kind": "Function",
+                    "parameters": [
+                      {
+                        "kind": "Standard",
+                        "module": "ksp::orbit",
+                        "name": "OrbitPatch"
+                      }
+                    ],
+                    "returnType": {
+                      "kind": "Option",
+                      "parameters": [
+                        {
+                          "kind": "Generic",
+                          "name": "U"
+                        }
+                      ]
+                    },
+                    "isAsync": false
+                  },
+                  "hasDefault": false,
+                  "description": "Function to be applied on each element of the array"
+                }
+              ],
+              "returnType": {
+                "kind": "Array",
+                "parameters": [
+                  {
+                    "kind": "Generic",
+                    "name": "U"
+                  }
+                ]
+              }
+            },
+            "find": {
+              "isAsync": false,
+              "name": "find",
+              "description": "Find first item of the array matching `predicate`",
+              "parameters": [
+                {
+                  "name": "predicate",
+                  "type": {
+                    "kind": "Function",
+                    "parameters": [
+                      {
+                        "kind": "Standard",
+                        "module": "ksp::orbit",
+                        "name": "OrbitPatch"
+                      }
+                    ],
+                    "returnType": {
+                      "kind": "Builtin",
+                      "name": "bool"
+                    },
+                    "isAsync": false
+                  },
+                  "hasDefault": false,
+                  "description": "Predicate function/check to be applied on each element of the array until element is found."
+                }
+              ],
+              "returnType": {
+                "kind": "Option",
+                "parameters": [
+                  {
+                    "kind": "Generic",
+                    "name": "T"
+                  }
+                ]
+              }
+            },
+            "exists": {
+              "isAsync": false,
+              "name": "exists",
+              "description": "Check if an item of the array matches `predicate`",
+              "parameters": [
+                {
+                  "name": "predicate",
+                  "type": {
+                    "kind": "Function",
+                    "parameters": [
+                      {
+                        "kind": "Standard",
+                        "module": "ksp::orbit",
+                        "name": "OrbitPatch"
+                      }
+                    ],
+                    "returnType": {
+                      "kind": "Builtin",
+                      "name": "bool"
+                    },
+                    "isAsync": false
+                  },
+                  "hasDefault": false,
+                  "description": "Predicate function/check to be applied on each element of the array until element is found."
+                }
+              ],
+              "returnType": {
+                "kind": "Builtin",
+                "name": "bool"
+              }
+            },
+            "reduce": {
+              "isAsync": false,
+              "name": "reduce",
+              "description": "Reduce array by an operation",
+              "parameters": [
+                {
+                  "name": "initial",
+                  "type": {
+                    "kind": "Generic",
+                    "name": "U"
+                  },
+                  "hasDefault": false,
+                  "description": "Initial value of the accumulator"
+                },
+                {
+                  "name": "reducer",
+                  "type": {
+                    "kind": "Function",
+                    "parameters": [
+                      {
+                        "kind": "Generic",
+                        "name": "U"
+                      },
+                      {
+                        "kind": "Standard",
+                        "module": "ksp::orbit",
+                        "name": "OrbitPatch"
+                      }
+                    ],
+                    "returnType": {
+                      "kind": "Generic",
+                      "name": "U"
+                    },
+                    "isAsync": false
+                  },
+                  "hasDefault": false,
+                  "description": "Combines accumulator with each element of the array and returns new accumulator value"
+                }
+              ],
+              "returnType": {
+                "kind": "Generic",
+                "name": "U"
+              }
+            },
+            "reverse": {
+              "isAsync": false,
+              "name": "reverse",
+              "description": "Reverse the order of the array",
+              "parameters": [],
+              "returnType": {
+                "kind": "Array",
+                "parameters": [
+                  {
+                    "kind": "Standard",
+                    "module": "ksp::orbit",
+                    "name": "OrbitPatch"
+                  }
+                ]
+              }
+            },
+            "find_patch": {
+              "isAsync": false,
+              "name": "find_patch",
+              "description": "Find orbit patch for a given universal time `ut`\n",
+              "parameters": [
+                {
+                  "name": "ut",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false
+                }
+              ],
+              "returnType": {
+                "kind": "Option",
+                "parameters": [
+                  {
+                    "kind": "Standard",
+                    "module": "ksp::orbit",
+                    "name": "OrbitPatch"
+                  }
+                ]
+              }
+            }
+          },
+          "assignableFromAny": false,
+          "assignableFrom": [],
+          "forInSource": {
+            "kind": "Standard",
+            "module": "ksp::orbit",
+            "name": "OrbitPatch"
+          },
+          "indexAccess": {
+            "kind": "Standard",
+            "module": "ksp::orbit",
+            "name": "OrbitPatch"
+          }
+        },
+        "Waypoint": {
+          "name": "Waypoint",
+          "description": "",
+          "fields": {
+            "name": {
+              "name": "name",
+              "description": "Name/label of the waypoint\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "string"
+              }
+            },
+            "body": {
+              "name": "body",
+              "description": "Celestial body the waypoint is based on\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Standard",
+                "module": "ksp::orbit",
+                "name": "Body"
+              }
+            },
+            "global_position": {
+              "name": "global_position",
+              "description": "Coordinate system independent position of the waypoint\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Standard",
+                "module": "ksp::math",
+                "name": "GlobalPosition"
+              }
+            },
+            "geo_coordinates": {
+              "name": "geo_coordinates",
+              "description": "Get `GeoCoordinates` of the waypoint\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Standard",
+                "module": "ksp::orbit",
+                "name": "GeoCoordinates"
+              }
+            },
+            "altitude": {
+              "name": "altitude",
+              "description": "Get altitude above sea-level of waypoint\n",
+              "readOnly": true,
+              "type": {
+                "kind": "Builtin",
+                "name": "float"
+              }
+            }
+          },
+          "methods": {},
+          "assignableFromAny": false,
+          "assignableFrom": []
         }
       },
       "typeAliases": {},
@@ -16302,6 +17740,31 @@
                 "kind": "Standard",
                 "module": "ksp::orbit",
                 "name": "Body"
+              }
+            ]
+          }
+        },
+        "find_waypoint": {
+          "isAsync": false,
+          "name": "find_waypoint",
+          "description": "Find waypoint by name/label.\n",
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "kind": "Builtin",
+                "name": "string"
+              },
+              "hasDefault": false
+            }
+          ],
+          "returnType": {
+            "kind": "Result",
+            "parameters": [
+              {
+                "kind": "Standard",
+                "module": "ksp::orbit",
+                "name": "Waypoint"
               }
             ]
           }
@@ -16812,6 +18275,21 @@
               "kind": "Standard",
               "module": "ksp::orbit",
               "name": "Orbit"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
             },
             {
               "kind": "Standard",
@@ -18371,6 +19849,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -19571,6 +21064,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -20711,6 +22219,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -21808,6 +23331,21 @@
               "kind": "Standard",
               "module": "ksp::orbit",
               "name": "Orbit"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
             },
             {
               "kind": "Standard",
@@ -23947,6 +25485,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -25236,7 +26789,8 @@
                     "kind": "Builtin",
                     "name": "float"
                   },
-                  "hasDefault": true
+                  "hasDefault": true,
+                  "description": "Relative amount of available space to acquire (beyond minimal space)"
                 }
               ],
               "returnType": {
@@ -25250,6 +26804,64 @@
               "name": "add_vertical_panel",
               "description": "Add sub panel with vertical layout to the container\n",
               "parameters": [
+                {
+                  "name": "gap",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": true,
+                  "description": "Gap between each element of the panel"
+                },
+                {
+                  "name": "align",
+                  "type": {
+                    "kind": "Standard",
+                    "module": "ksp::ui",
+                    "name": "Align"
+                  },
+                  "hasDefault": true,
+                  "description": "Alignment of the panel in its parent container"
+                },
+                {
+                  "name": "stretch",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": true,
+                  "description": "Relative amount of available space to acquire (beyond minimal space)"
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::ui",
+                "name": "Container"
+              }
+            },
+            "add_vertical_scroll": {
+              "isAsync": false,
+              "name": "add_vertical_scroll",
+              "description": "Add vertical scroll view to the container\n",
+              "parameters": [
+                {
+                  "name": "minWidth",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false,
+                  "description": "Minimum width of the scroll view"
+                },
+                {
+                  "name": "minHeight",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false,
+                  "description": "Minimum height of the scroll view"
+                },
                 {
                   "name": "gap",
                   "type": {
@@ -27839,7 +29451,8 @@
                     "kind": "Builtin",
                     "name": "float"
                   },
-                  "hasDefault": true
+                  "hasDefault": true,
+                  "description": "Relative amount of available space to acquire (beyond minimal space)"
                 }
               ],
               "returnType": {
@@ -27853,6 +29466,64 @@
               "name": "add_vertical_panel",
               "description": "Add sub panel with vertical layout to the container\n",
               "parameters": [
+                {
+                  "name": "gap",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": true,
+                  "description": "Gap between each element of the panel"
+                },
+                {
+                  "name": "align",
+                  "type": {
+                    "kind": "Standard",
+                    "module": "ksp::ui",
+                    "name": "Align"
+                  },
+                  "hasDefault": true,
+                  "description": "Alignment of the panel in its parent container"
+                },
+                {
+                  "name": "stretch",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": true,
+                  "description": "Relative amount of available space to acquire (beyond minimal space)"
+                }
+              ],
+              "returnType": {
+                "kind": "Standard",
+                "module": "ksp::ui",
+                "name": "Container"
+              }
+            },
+            "add_vertical_scroll": {
+              "isAsync": false,
+              "name": "add_vertical_scroll",
+              "description": "Add vertical scroll view to the container\n",
+              "parameters": [
+                {
+                  "name": "minWidth",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false,
+                  "description": "Minimum width of the scroll view"
+                },
+                {
+                  "name": "minHeight",
+                  "type": {
+                    "kind": "Builtin",
+                    "name": "float"
+                  },
+                  "hasDefault": false,
+                  "description": "Minimum height of the scroll view"
+                },
                 {
                   "name": "gap",
                   "type": {
@@ -28975,6 +30646,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -30082,6 +31768,21 @@
               "kind": "Standard",
               "module": "ksp::orbit",
               "name": "Orbit"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
             },
             {
               "kind": "Standard",
@@ -31215,6 +32916,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -32322,6 +34038,21 @@
               "kind": "Standard",
               "module": "ksp::orbit",
               "name": "Orbit"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
             },
             {
               "kind": "Standard",
@@ -33442,6 +35173,21 @@
               "kind": "Standard",
               "module": "ksp::orbit",
               "name": "Orbit"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
             },
             {
               "kind": "Standard",
@@ -34655,6 +36401,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -35815,6 +37576,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -36932,6 +38708,21 @@
               "kind": "Standard",
               "module": "ksp::orbit",
               "name": "Orbit"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
             },
             {
               "kind": "Standard",
@@ -38072,6 +39863,21 @@
               "kind": "Standard",
               "module": "ksp::orbit",
               "name": "Orbit"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
             },
             {
               "kind": "Standard",
@@ -39225,6 +41031,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -40352,6 +42173,21 @@
               "kind": "Standard",
               "module": "ksp::orbit",
               "name": "Orbit"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
             },
             {
               "kind": "Standard",
@@ -41645,6 +43481,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -42755,6 +44606,21 @@
             },
             {
               "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
+            },
+            {
+              "kind": "Standard",
               "module": "ksp::resource",
               "name": "FlowDirection"
             },
@@ -43862,6 +45728,21 @@
               "kind": "Standard",
               "module": "ksp::orbit",
               "name": "Orbit"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
             },
             {
               "kind": "Standard",
@@ -44982,6 +46863,21 @@
               "kind": "Standard",
               "module": "ksp::orbit",
               "name": "Orbit"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "OrbitPatch"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Trajectory"
+            },
+            {
+              "kind": "Standard",
+              "module": "ksp::orbit",
+              "name": "Waypoint"
             },
             {
               "kind": "Standard",
@@ -46397,14 +48293,9 @@
               "description": "Get the planed trajectory of the vessel if all maneuvers are successfully executed.The list of orbit patch will always start after the first maneuvering node.I.e. if not maneuvers are planed this list will be empty.\n",
               "readOnly": true,
               "type": {
-                "kind": "Array",
-                "parameters": [
-                  {
-                    "kind": "Standard",
-                    "module": "ksp::orbit",
-                    "name": "Orbit"
-                  }
-                ]
+                "kind": "Standard",
+                "module": "ksp::orbit",
+                "name": "Trajectory"
               }
             },
             "nodes": {
@@ -46540,6 +48431,7 @@
           "fields": {
             "time": {
               "name": "time",
+              "description": "Get/set the universal time the maneuver should be executed\n",
               "readOnly": false,
               "type": {
                 "kind": "Builtin",
@@ -46548,6 +48440,7 @@
             },
             "prograde": {
               "name": "prograde",
+              "description": "Get/set the orbital prograde part of the maneuver\n",
               "readOnly": false,
               "type": {
                 "kind": "Builtin",
@@ -46556,6 +48449,7 @@
             },
             "normal": {
               "name": "normal",
+              "description": "Get/set the orbital normal part of the maneuver\n",
               "readOnly": false,
               "type": {
                 "kind": "Builtin",
@@ -46564,6 +48458,7 @@
             },
             "radial_out": {
               "name": "radial_out",
+              "description": "Get/set the orbital radial part of the maneuver\n",
               "readOnly": false,
               "type": {
                 "kind": "Builtin",
@@ -46572,6 +48467,7 @@
             },
             "ETA": {
               "name": "ETA",
+              "description": "Get/set the estimated time of arrival to the maneuver\n",
               "readOnly": false,
               "type": {
                 "kind": "Builtin",
@@ -46580,15 +48476,17 @@
             },
             "orbit_patch": {
               "name": "orbit_patch",
+              "description": "Get the orbit patch the maneuver should be executed on\n",
               "readOnly": true,
               "type": {
                 "kind": "Standard",
                 "module": "ksp::orbit",
-                "name": "Orbit"
+                "name": "OrbitPatch"
               }
             },
             "burn_vector": {
               "name": "burn_vector",
+              "description": "Get/set the burn vector of the maneuver in the celestial frame of the main body\n",
               "readOnly": false,
               "type": {
                 "kind": "Standard",
@@ -46598,6 +48496,7 @@
             },
             "global_burn_vector": {
               "name": "global_burn_vector",
+              "description": "Get/set coordinate independent the burn vector of the maneuver\n",
               "readOnly": false,
               "type": {
                 "kind": "Standard",
@@ -46607,6 +48506,7 @@
             },
             "burn_duration": {
               "name": "burn_duration",
+              "description": "Get the estimated burn duration of the maneuver\n",
               "readOnly": true,
               "type": {
                 "kind": "Builtin",
@@ -46615,11 +48515,12 @@
             },
             "expected_orbit": {
               "name": "expected_orbit",
+              "description": "Get the expected orbit patch after the maneuver has been executed\n",
               "readOnly": true,
               "type": {
                 "kind": "Standard",
                 "module": "ksp::orbit",
-                "name": "Orbit"
+                "name": "OrbitPatch"
               }
             }
           },
@@ -46627,6 +48528,7 @@
             "remove": {
               "isAsync": false,
               "name": "remove",
+              "description": "Remove maneuver node from the maneuver plan\n",
               "parameters": [],
               "returnType": {
                 "kind": "Builtin",
@@ -49698,14 +51600,9 @@
               "description": "Get the entire trajectory of the vessel containing all orbit patches.\n",
               "readOnly": true,
               "type": {
-                "kind": "Array",
-                "parameters": [
-                  {
-                    "kind": "Standard",
-                    "module": "ksp::orbit",
-                    "name": "Orbit"
-                  }
-                ]
+                "kind": "Standard",
+                "module": "ksp::orbit",
+                "name": "Trajectory"
               }
             },
             "celestial_frame": {
@@ -50296,12 +52193,12 @@
             },
             "orbit": {
               "name": "orbit",
-              "description": "Current orbit or orbit patch of the vessel.\n",
+              "description": "Current orbit patch of the vessel.\n",
               "readOnly": true,
               "type": {
                 "kind": "Standard",
                 "module": "ksp::orbit",
-                "name": "Orbit"
+                "name": "OrbitPatch"
               }
             }
           },

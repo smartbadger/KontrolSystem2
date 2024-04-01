@@ -54,6 +54,8 @@ export interface RealizedType extends TO2Type {
 
   forInSource(): TO2Type | undefined;
 
+  supportIndexAccess(): TO2Type | undefined;
+
   fillGenerics(
     context: ModuleContext,
     genericMap: Record<string, RealizedType>,
@@ -112,6 +114,10 @@ export class GenericParameter implements RealizedType {
   }
 
   forInSource(): TO2Type | undefined {
+    return undefined;
+  }
+
+  supportIndexAccess(): TO2Type | undefined {
     return undefined;
   }
 
@@ -191,6 +197,10 @@ export const UNKNOWN_TYPE: RealizedType = {
   },
 
   forInSource() {
+    return undefined;
+  },
+
+  supportIndexAccess() {
     return undefined;
   },
 
@@ -342,8 +352,8 @@ export class TypeResolver {
 var typeResolverInstance: TypeResolver | undefined = undefined;
 
 export function currentTypeResolver(): TypeResolver {
-  if(typeResolverInstance === undefined)
-    console.log("Init type resolver from default")
+  if (typeResolverInstance === undefined)
+    console.log("Init type resolver from default");
   typeResolverInstance ??= new TypeResolver(REFERENCE);
   return typeResolverInstance;
 }
@@ -353,6 +363,6 @@ export function typeResolverInitialized(): boolean {
 }
 
 export function initTypeResolver(reference: Reference) {
-  console.log("Init type resolver from mod")
+  console.log("Init type resolver from mod");
   typeResolverInstance = new TypeResolver(reference);
 }
